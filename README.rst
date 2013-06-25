@@ -64,6 +64,12 @@ Use in templates:
     {% gravatar user.email 150 "user@example.com" %}
     # <img class="gravatar" src="https://secure.gravatar.com/avatar/hash.jpg?size=150" width="150" height="150" alt="user@example.com" />
 
+    {% if user.email|has_gravatar %}
+      {# Display gravatar #}
+    {% else %}
+      Please upload an image to gravatar.
+    {% endif %}
+
 Configuring
 ===========
 The following options can be configured in your settings.py:

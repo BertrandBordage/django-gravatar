@@ -6,6 +6,9 @@ from django_gravatar.helpers import get_gravatar_url, has_gravatar as has_gravat
 # Get template.Library instance
 register = template.Library()
 
+def has_gravatar(user_or_email):
+    return has_gravatar_helper(user_or_email)
+
 def gravatar_url(user_or_email, size=GRAVATAR_DEFAULT_SIZE):
     """ Builds a gravatar url from an user or email """
     if hasattr(user_or_email, 'email'):
@@ -33,5 +36,6 @@ def gravatar(user_or_email, size=GRAVATAR_DEFAULT_SIZE, alt_text='', css_class='
     return '<img class="{css_class}" src="{src}" width="{width}" height="{height}" alt="{alt}" />'.format(\
         css_class=css_class, src=url, width=size, height=size, alt=alt_text)
 
+register.filter(has_gravatar)
 register.simple_tag(gravatar_url)
 register.simple_tag(gravatar)
